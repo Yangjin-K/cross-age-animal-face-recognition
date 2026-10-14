@@ -1,0 +1,55 @@
+﻿# ==================== 大型数据文件 ====================
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.pdf
+*.csv
+*.xlsx
+*.mat
+*.pt
+*.pth
+*.bin
+*.onnx
+*.h5
+*.hdf5
+*.npz
+*.pkl
+data/
+*Dataset/
+
+# ==================== 具体文件名（如果仍需忽略） ====================
+1-s2.0-S2352340923000574-main.pdf
+20260211161314_979.zip
+MFD_metadatas.csv
+
+# ==================== Python ====================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+*.egg-info/
+
+# ==================== IDE ====================
+.vscode/
+.idea/
+*.swp
+
+# ==================== 训练输出 ====================
+training_results/
+runs/
+checkpoints/
+
+# ==================== OS ====================
+.DS_Store
+Thumbs.db
+image_cache.pkl
+
+
+# ==================== 项目特定忽略 ====================
+logs/
+training_plots/
+ablation_results/
+.crossnote/

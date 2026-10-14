@@ -1,0 +1,38 @@
+# 微调模型配置 (基于 swin_t_decoupling 的超参数调整)
+model:
+  backbone: swin_t
+  embedding_size: 768
+  arcface:
+    margin: 0.35  # 沿用原配置，但在微调阶段可以适当提高一点以加强类间拉伸 (如 0.4~)
+    scale: 64.0
+  dropout: 0.3
+  period_loss_weight: 0.15
+  orthogonal_loss_weight: 0.1
+  
+  # 注意：由于你指定的预训练权重是 swin_t_projection_for_inference.pth
+  # 这里的策略必须使用 projection，否则结构对不上！
+  orthogonal_strategy: projection
+
+# 微调训练配置
+training:
+  stage: finetune
+  num_epochs: 100
+  batch_size: 128
+  
+  # 在根文件目录执行时，直接使用正确的相对路径（无需 ../）
+  pretrained_path: ./backbone_swin_t_projection_for_inference.pth
+  
+  learning_rate:
+    backbone: 1e-5  # 微调时主干网学习率降低 (原配置是 5e-5)
+    head: 5e-4      # 头部（特别是新增的 MLP 瓶颈）需要快速收敛
+  weight_decay: 1e-3
+  momentum: 0.9
+  scheduler: cosine
+  rev_lambda: 0.1
+  patience: 20
+
+# 数据配置
+data:
+  csv_path: ./data/MFD_metadatas.csv
+  preload_image: true
+  pre_dataset: false

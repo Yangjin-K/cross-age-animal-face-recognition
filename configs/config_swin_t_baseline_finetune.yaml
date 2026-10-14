@@ -1,0 +1,36 @@
+# 微调模型配置 (Swin-T Baseline 微调 - 消融实验)
+model:
+  backbone: swin_t
+  embedding_size: 768
+  arcface:
+    margin: 0.35
+    scale: 64.0
+  dropout: 0.3
+  period_loss_weight: 0.15
+  orthogonal_loss_weight: 0.0
+  # 正交策略 (消融实验设为 null / None)
+  orthogonal_strategy: null
+
+# 微调训练配置
+training:
+  stage: finetune
+  num_epochs: 100
+  batch_size: 128
+  
+  # 注意：你需要将这里的路径替换为你用 config_swin_t_baseline.yaml 刚训练好的预训练权重路径
+  pretrained_path: ./backbone_swin_t_None_for_inference.pth
+  
+  learning_rate:
+    backbone: 1e-5  # 微调时主干网学习率降低
+    head: 5e-4      # 头部需要快速收敛
+  weight_decay: 1e-3
+  momentum: 0.9
+  scheduler: cosine
+  rev_lambda: 0.1
+  patience: 20
+
+# 数据配置
+data:
+  csv_path: ./data/MFD_metadatas.csv
+  preload_image: true
+  pre_dataset: false

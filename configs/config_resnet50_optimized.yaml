@@ -1,0 +1,44 @@
+# 模型配置
+model:
+  # 特征提取器类型: resnet50, vit, swin_t, swin_b
+  backbone: resnet50
+  # 嵌入维度
+  embedding_size: 768
+  # 分类头参数
+  arcface:
+    margin: 0.35
+    scale: 64.0
+  # 正则化参数 - 降低dropout值，避免过度正则化
+  dropout: 0.3
+  # 时期预测参数
+  period_loss_weight: 0.15
+
+# 训练配置
+training:
+  # 训练轮次
+  num_epochs: 100
+  # 批次大小
+  batch_size: 32
+  # 学习率 - 稍微降低学习率，提高稳定性
+  learning_rate:
+    backbone: 5e-5
+    head: 5e-4
+  # 权重衰减
+  weight_decay: 1e-3
+  # 动量
+  momentum: 0.9
+  # 学习率调度器
+  scheduler: cosine
+  # 梯度反转参数
+  rev_lambda: 0.1
+  # 早停参数
+  patience: 15
+
+# 数据配置
+data:
+  # 数据集路径
+  csv_path: ./data/MFD_metadatas.csv
+  # 预处理
+  preload_image: true
+  # 使用预处理数据集
+  pre_dataset: true

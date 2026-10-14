@@ -1,0 +1,22 @@
+# PyTorch核心库
+torch>=2.0.0
+torchvision>=0.15.0
+
+# 图像处理
+Pillow>=9.0.0
+
+# YAML配置解析
+PyYAML>=6.0
+
+# 数据可视化
+matplotlib>=3.5.0
+numpy>=1.20.0
+
+# 标准库依赖（无需安装）
+# - random
+# - pickle
+# - os
+# - sys
+# - time
+# - datetime
+# - argparse
